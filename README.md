@@ -1,4 +1,4 @@
-# Lixos
+# Texto explicativo só para encher linguiça
 Comando feito para arrombar veículos, sistema com notificação por gps para policiais, um pequeno contador de tempo para mostrar quanto ainda falta para terminar, tudo isto totalmente de graça, foda não? Eu sei que sou foda, vlw flw.
 
 Coisas em desenvolvimento.
