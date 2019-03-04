@@ -6,5 +6,5 @@ Mensagem de texto para policiais avisando que um veículo está sendo arrombado.
 
 Coisas em desenvolvimento:
 
-Bloquear teclas para não serem usadas durante o arrombamento ( ͡° ͜ʖ ͡°)
+Bloquear teclas para não serem usadas durante o arrombamento ( ͡° ͜ʖ ͡°).
 Encerrar o arrombamento quando morrer, tomar tiro de taser ou apertar um botão.
