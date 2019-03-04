@@ -105,6 +105,7 @@ isTaken = 1
 	end)
 
 			TaskStartScenarioInPlace(playerPed, 'WORLD_HUMAN_WELDING', 0, true)
+			ESX.ShowNotification('Arrombamento iniciado')
 			roubo = true
       Citizen.CreateThread(function()
         while true do
