@@ -125,13 +125,13 @@ end)
 					SetVehicleDoorsLockedForAllPlayers(vehicle, false)
 					ClearPedTasksImmediately(playerPed)
           ESX.ShowNotification('Veiculo arrombado')
-          Citizen.Wait(10000)
+          Citizen.Wait(60000)
           isTaken = 0
           TriggerServerEvent('esx_comandos:stopalertcops')
 				else
 					ESX.ShowNotification('Falhou')
           ClearPedTasksImmediately(playerPed)
-          Citizen.Wait(10000)
+          Citizen.Wait(60000)
           isTaken = 0
           TriggerServerEvent('esx_comandos:stopalertcops')
 				end
