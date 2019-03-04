@@ -45,7 +45,19 @@ end)
 
 RegisterNetEvent('esx_comandos:setcopnotification')
 AddEventHandler('esx_comandos:setcopnotification', function()
-	ESX.ShowNotification("Roubo de carro em andamento. O pistas serão dadas em seu mapa.")
+	ESX.ShowNotification("Um veículo está sendo arrombado.")
+end)
+
+RegisterNetEvent('esx_comandos:roubando')
+AddEventHandler('esx_comandos:roubando', function()
+roubo = true
+end)
+
+RegisterNetEvent('esx_comandos:pararRoubo')
+AddEventHandler('esx_comandos:pararRoubo', function()
+Citizen.Wait(timer)
+roubo = false
+time = 30
 end)
 
 RegisterNetEvent('esx_comandos:arrombar')
@@ -55,7 +67,6 @@ AddEventHandler('esx_comandos:arrombar', function()
 
 	if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 5.0) then
     local vehicle = nil
-    local roubo = false
     
 
 		if IsPedInAnyVehicle(playerPed, false) then
@@ -73,9 +84,28 @@ AddEventHandler('esx_comandos:arrombar', function()
 				StartVehicleAlarm(vehicle)
 			end
 
-roubo = true
+
 isTaken = 1
-      TaskStartScenarioInPlace(playerPed, 'WORLD_HUMAN_WELDING', 0, true)
+
+	Citizen.CreateThread(function()
+	while time > 0 and roubo do
+		Citizen.Wait(1000)
+
+		if time > 0 then
+			time = time - 1
+		end
+	end
+	end)
+
+	Citizen.CreateThread(function()
+	while roubo do
+		Citizen.Wait(0)
+		drawTxt(0.66, 1.44, 1.0, 1.0, 0.4, ('Arrombando em: ' .. time), 255, 0, 0, 255)
+	end
+	end)
+
+			TaskStartScenarioInPlace(playerPed, 'WORLD_HUMAN_WELDING', 0, true)
+			roubo = true
       Citizen.CreateThread(function()
         while true do
         Citizen.Wait(3000)
@@ -85,8 +115,9 @@ isTaken = 1
     end
   end
 end)
+      TriggerServerEvent('esx_comandos:registerActivity', 1)
 
-      Citizen.CreateThread(function()      
+      Citizen.CreateThread(function()
         Citizen.Wait(timer)
         
 				if chance <= 66 then
@@ -94,56 +125,19 @@ end)
 					SetVehicleDoorsLockedForAllPlayers(vehicle, false)
 					ClearPedTasksImmediately(playerPed)
           ESX.ShowNotification('Veiculo arrombado')
-          Citizen.Wait(60000) -- tempo que vai matar o blip dos cops
+          Citizen.Wait(10000)
           isTaken = 0
           TriggerServerEvent('esx_comandos:stopalertcops')
 				else
 					ESX.ShowNotification('Falhou')
           ClearPedTasksImmediately(playerPed)
-          Citizen.Wait(60000) -- tempo que vai matar o blip dos cops
+          Citizen.Wait(10000)
           isTaken = 0
           TriggerServerEvent('esx_comandos:stopalertcops')
 				end
-      end)      
+      end)
     end
   else
     ESX.ShowNotification('Nenhum veículo próximo para ser arrombado')
   end
-end)
-
-
-
-
-
-RegisterNetEvent('esx_comandos:roubando')
-AddEventHandler('esx_comandos:roubando', function()
-roubo = true
-end)
-
-RegisterNetEvent('esx_comandos:pararRoubo')
-AddEventHandler('esx_comandos:pararRoubo', function()
-Citizen.Wait(timer)
-roubo = false
-time = 30
-end)
-
-RegisterNetEvent('esx_comandos:startTimer')
-AddEventHandler('esx_comandos:startTimer', function()
-
-	Citizen.CreateThread(function()
-		while time > 0 and roubo do
-			Citizen.Wait(1000)
-
-			if time > 0 then
-				time = time - 1
-			end
-		end
-	end)
-
-	Citizen.CreateThread(function()
-		while roubo do
-			Citizen.Wait(0)
-			drawTxt(0.66, 1.44, 1.0, 1.0, 0.4, ('Arrombando em: ' .. time), 255, 0, 0, 255)
-		end
-	end)
 end)
