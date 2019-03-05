@@ -60,22 +60,6 @@ roubo = false
 time = 30
 end)
 
-RegisterNetEvent('esx_arrombar:startTimer')
-AddEventHandler('esx_arrombar:startTimer', function()
-
-Citizen.CreateThread(function()
-while time > 0 and roubo do
-  Citizen.Wait(1000)
-
-  if time > 0 then
-    time = time - 1
-  end
-end
-end)
-
-
-
-
 RegisterNetEvent('esx_arrombar:arrombar')
 AddEventHandler('esx_arrombar:arrombar', function()
 local playerPed = PlayerPedId()
