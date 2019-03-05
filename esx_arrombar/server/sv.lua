@@ -4,8 +4,8 @@ TriggerEvent('esx:getSharedObject', function(obj)
 	ESX = obj
 end)
 
-RegisterServerEvent('esx_comandos:alertcops')
-AddEventHandler('esx_comandos:alertcops', function(cx,cy,cz)
+RegisterServerEvent('esx_arrombar:alertcops')
+AddEventHandler('esx_arrombar:alertcops', function(cx,cy,cz)
 	local source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local xPlayers = ESX.GetPlayers()
@@ -13,13 +13,13 @@ AddEventHandler('esx_comandos:alertcops', function(cx,cy,cz)
 	for i=1, #xPlayers, 1 do
 		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
 		if xPlayer.job.name == 'police' then
-			TriggerClientEvent('esx_comandos:setcopblip', xPlayers[i], cx,cy,cz)
+			TriggerClientEvent('esx_arrombar:setcopblip', xPlayers[i], cx,cy,cz)
 		end
 	end
 end)
 
-RegisterServerEvent('esx_comandos:stopalertcops')
-AddEventHandler('esx_comandos:stopalertcops', function()
+RegisterServerEvent('esx_arrombar:stopalertcops')
+AddEventHandler('esx_arrombar:stopalertcops', function()
 	local source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local xPlayers = ESX.GetPlayers()
@@ -27,13 +27,13 @@ AddEventHandler('esx_comandos:stopalertcops', function()
 	for i=1, #xPlayers, 1 do
 		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
 		if xPlayer.job.name == 'police' then
-			TriggerClientEvent('esx_comandos:removecopblip', xPlayers[i])
+			TriggerClientEvent('esx_arrombar:removecopblip', xPlayers[i])
 		end
 	end
 end)
 
-RegisterServerEvent('esx_comandos:registerActivity')
-AddEventHandler('esx_comandos:registerActivity', function(value)
+RegisterServerEvent('esx_arrombar:registerActivity')
+AddEventHandler('esx_arrombar:registerActivity', function(value)
 	activity = value
 	if value == 1 then
 		activitySource = source
@@ -42,7 +42,7 @@ AddEventHandler('esx_comandos:registerActivity', function(value)
 		for i=1, #xPlayers, 1 do
 			local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
 			if xPlayer.job.name == 'police' then
-				TriggerClientEvent('esx_comandos:setcopnotification', xPlayers[i])
+				TriggerClientEvent('esx_arrombar:setcopnotification', xPlayers[i])
 			end
 		end
 	else
@@ -54,6 +54,6 @@ RegisterCommand("arrombar", function(source, args, rawCommand)
 	local _source = source
   local xPlayer  = ESX.GetPlayerFromId(source)
   
-  TriggerClientEvent('esx_comandos:arrombar', _source)
-  TriggerClientEvent('esx_comandos:pararRoubo', _source)
+  TriggerClientEvent('esx_arrombar:arrombar', _source)
+  TriggerClientEvent('esx_arrombar:pararRoubo', _source)
 end)
