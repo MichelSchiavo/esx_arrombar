@@ -1,7 +1,6 @@
 local timer = 30000
 local time = 30
 local roubo = false
-local ped = GetPlayerPed(-1)
 local copblip
 local isTaken = 0
 ESX = nil
@@ -100,7 +99,7 @@ if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 5.0) then
     Citizen.CreateThread(function()
     while roubo do
       Citizen.Wait(0)
-      drawTxt(0.66, 1.44, 1.0, 1.0, 0.4, ('Arrombando em: ' .. time .. ' segundos!'), 255, 0, 0, 255)
+      drawTxt(0.95, 1.44, 1.0, 1.0, 0.4, ('Arrombando em: ' .. time .. ' segundos!'), 255, 0, 0, 255)
     end
     end)
 
@@ -111,7 +110,7 @@ if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 5.0) then
     while true do
       Citizen.Wait(3000)
       if isTaken == 1 then
-        local coords = GetEntityCoords(ped)
+        local coords = GetEntityCoords(GetPlayerPed(-1))
         TriggerServerEvent('esx_arrombar:alertcops', coords.x, coords.y, coords.z)
       end
     end
